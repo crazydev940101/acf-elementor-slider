@@ -1,0 +1,73 @@
+.acf-image-slider {
+    position: relative;
+    max-width: 100%; /* Ensure the slider doesn't exceed the container */
+}
+
+.acf-main-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    opacity: 0;  /* Initially hidden */
+    transition: opacity 0.5s ease-in-out; /* Smooth fade-in transition */
+}
+
+/* CSS for the main image when it's visible */
+.acf-main-image img.visible {
+    opacity: 1; /* Make the image visible */
+}
+
+.acf-thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px; /* Space between the main image and thumbnails */
+    gap: 10px; /* Space between thumbnails */
+}
+
+.acf-thumbnail {
+    cursor: pointer;
+    opacity: 0.7;
+    filter: brightness(100%);
+    transition: opacity 0.3s, filter 0.3s;
+}
+
+.acf-thumbnail.selected {
+    opacity: 1;
+    filter: brightness(120%);
+}
+
+.acf-thumbnail:hover {
+    opacity: 1;
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+.acf-thumbnail img {
+    width: 80px; /* Thumbnail size */
+    height: auto;
+    border-radius: 5px;
+}
+
+.acf-slider-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.acf-prev, .acf-next {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 24px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.acf-prev:hover, .acf-next:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
