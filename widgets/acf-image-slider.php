@@ -16,7 +16,7 @@ class Elementor_ACF_Image_Slider_Widget extends \Elementor\Widget_Base {
     }
 
     public function get_icon() {
-        return 'eicon-slider-3'; // Icon for the widget
+        return 'eicon-slider-3d'; // Icon for the widget
     }
 
     public function get_categories() {
@@ -78,27 +78,34 @@ class Elementor_ACF_Image_Slider_Widget extends \Elementor\Widget_Base {
 
     }
     
-    
-    
-
     protected function content_template() {
         ?>
         <#
-        var images = settings.acf_field_name;
-        if ( images.length ) { #>
+        var images = settings.acf_field_name; // Get the ACF field name from settings
+        if ( images && images.length ) { #>
             <div class="acf-image-slider">
                 <!-- Main Image -->
                 <div class="acf-main-image">
-                    <!-- Use the full-size image for the main image -->
-                    <img src="{{ images[0].url }}" alt="{{ images[0].alt }}" />
+                    <img id="main-image" src="{{ images[0].url }}" alt="{{ images[0].alt }}" />
                 </div>
     
                 <!-- Thumbnails -->
                 <div class="acf-thumbnails">
-                    <# _.each( images, function( image, index ) { #>
-                        <div class="acf-thumbnail" data-index="{{ index }}">
-                            <!-- Use the thumbnail size for the thumbnails -->
-                            <img src="{{ image.sizes.thumbnail }}" alt="{{ image.alt }}" />
+                    <# _.each( images, function( image, index ) { 
+                        // Check if the sizes object exists and fallback if necessary
+                        var thumbnailUrl = '';
+                        if (image.sizes && image.sizes.thumbnail) {
+                            thumbnailUrl = image.sizes.thumbnail; // Use thumbnail size
+                        } else if (image.sizes && image.sizes.medium) {
+                            thumbnailUrl = image.sizes.medium; // Use medium size if no thumbnail
+                        } else if (image.sizes && image.sizes.large) {
+                            thumbnailUrl = image.sizes.large; // Fallback to large size
+                        } else {
+                            thumbnailUrl = image.url; // If no sizes available, use the full URL
+                        }
+                    #>
+                        <div class="acf-thumbnail" data-index="{{ index }}" data-src="{{ image.url }}">
+                            <img src="{{ thumbnailUrl }}" alt="{{ image.alt }}" />
                         </div>
                     <# }); #>
                 </div>
@@ -115,4 +122,5 @@ class Elementor_ACF_Image_Slider_Widget extends \Elementor\Widget_Base {
         <?php
     }
     
+        
 }

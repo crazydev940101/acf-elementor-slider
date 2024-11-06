@@ -52,4 +52,19 @@ jQuery(document).ready(function($) {
 
     // Initialize: Set the first image as active
     updateMainImage(currentIndex);
+
+
+    // Trigger when the ACF field name control is updated
+    var widgetId = '#elementor-widget-' + settings.widget_id;
+
+    // Listen for changes to the ACF field name input
+    $(widgetId).find('.elementor-control-acf_field_name input').on('input', function() {
+        // You can handle your custom logic here, such as reloading the preview or something else
+        console.log('ACF Field name changed to: ' + $(this).val());
+
+        // Optionally, trigger content_template re-render here
+        // For example:
+        $(widgetId).find('.elementor-widget-container').trigger('content-changed');
+    });
+    
 });
