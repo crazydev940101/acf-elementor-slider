@@ -1,27 +1,126 @@
 .acf-image-slider {
     position: relative;
-    max-width: 100%; /* Ensure the slider doesn't exceed the container */
+    max-width: 100%;
+    justify-items: center;
 }
 
+/* Main Image Styles */
 .acf-main-image img {
+    display: none; /* Hide all images initially */
     width: 100%;
     height: auto;
     border-radius: 8px;
-    display: block;
-    opacity: 0.7;  /* Initially hidden */
-    transition: opacity 0.5s ease-in-out; /* Smooth fade-in transition */
 }
 
-/* CSS for the main image when it's visible */
-.acf-main-image img.visible {
-    opacity: 1; /* Make the image visible */
+/* Show the active image */
+.acf-main-image img.active {
+    display: block;
+}
+
+/* Navigation Arrows */
+.acf-slider-nav {
+    position: absolute;
+    top: calc(50% - 50px);
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 10;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.acf-prev, .acf-next {
+    color: #541212 !important;
+    font-size: 32px !important;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.acf-prev:hover, .acf-next:hover {
+    background: transparent;
+    color: #333 !important;
+    text-decoration: none !important;
+}
+
+
+/* Thumbnail Slider Arrows */
+.acf-thumbnails-wrapper {
+    position: relative;
+    overflow-x: hidden;
+    margin-top: 15px;
+    padding-bottom: 10px;
+    max-width: -webkit-fill-available;
+}
+
+.acf-thumbnail-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #333;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.acf-thumbnails-slider-nav {
+    position: absolute;
+    top: calc(100% - 75px);
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 10;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.acf-thumbnail-nav.left, .acf-thumbnail-nav.right {
+    color: #541212 !important;
+    font-size: 32px !important;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+} 
+
+.acf-thumbnail-nav.left:hover, .acf-thumbnail-nav.right:hover {
+    background: transparent;
+    color: #333 !important;
+    text-decoration: none !important;
+}
+
+.acf-thumbnail-nav.left {
+    left: 100px;
+}
+
+.acf-thumbnail-nav.right {
+    right: 100px;
+}
+
+.acf-thumbnail-nav:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+/* Rest of your existing thumbnail styles */
+.acf-thumbnails-wrapper::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit-based browsers (Chrome, Safari) */
+}
+
+.acf-thumbnails-wrapper {
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
 }
 
 .acf-thumbnails {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px; /* Space between the main image and thumbnails */
+    display: flex; /* Use flexbox for horizontal layout */
     gap: 10px; /* Space between thumbnails */
+    padding-bottom: 10px;
 }
 
 .acf-thumbnail {
@@ -45,31 +144,27 @@
     width: 100px; /* Thumbnail size */
     height: auto;
     border-radius: 5px;
+    max-width: none !important;
 }
 
-.acf-slider-nav {
-    position: absolute;
-    top: calc(50% - 50px);;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    z-index: 10;
-    padding-right: 20px;
-    padding-left: 20px;
-}
 
-.acf-prev, .acf-next {
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    font-size: 24px;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
 
-.acf-prev:hover, .acf-next:hover {
-    background: rgba(0, 0, 0, 0.7);
+@media screen and (max-width: 767px) {
+    .acf-thumbnail img {
+        width: 50px;
+    }
+    .acf-thumbnails-slider-nav {
+        top: calc(100% - 50px);
+    }
+    .acf-thumbnail-nav.left {
+        left: 30px;
+    }
+    .acf-thumbnail-nav.right {
+        right: 30px;
+    }
+
+    .acf-slider-nav { 
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }

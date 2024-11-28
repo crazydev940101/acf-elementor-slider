@@ -38,7 +38,7 @@ class Elementor_ACF_Image_Slider_Widget extends \Elementor\Widget_Base {
             [
                 'label'   => esc_html__( 'ACF Field Name', 'acf-elementor-slider' ),
                 'type'    => Controls_Manager::TEXT,
-                'default' => 'your_acf_field_name', // Default ACF field name
+                'default' => 'room_slides', // Default ACF field name
             ]
         );
 
@@ -52,24 +52,35 @@ class Elementor_ACF_Image_Slider_Widget extends \Elementor\Widget_Base {
     
         if ( $images ) : ?>
             <div class="acf-image-slider">
-                <!-- Main Image -->
+                 <!-- Main Image (All preloaded images hidden initially) -->
                 <div class="acf-main-image">
-                    <img id="main-image" src="<?php echo esc_url( $images[0]['url'] ); ?>" alt="<?php echo esc_attr( $images[0]['alt'] ); ?>" />
-                </div>
-
-                <!-- Thumbnails (static below the main image) -->
-                <div class="acf-thumbnails">
                     <?php foreach ( $images as $index => $image ) : ?>
-                        <div class="acf-thumbnail" data-index="<?php echo $index; ?>" data-src="<?php echo esc_url( $image['url'] ); ?>">
-                            <img src="<?php echo esc_url( $image['sizes']['thumbnail'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" />
-                        </div>
+                        <img id="main-image-<?php echo $index; ?>" src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="acf-main-image-img" />
                     <?php endforeach; ?>
                 </div>
 
+                <!-- Thumbnails (static below the main image) -->
+                <div class="acf-thumbnails-wrapper">
+                    
+                    <div class="acf-thumbnails">
+                        <?php foreach ( $images as $index => $image ) : ?>
+                            <div class="acf-thumbnail" data-index="<?php echo $index; ?>" data-src="<?php echo esc_url( $image['url'] ); ?>">
+                                <img src="<?php echo esc_url( $image['sizes']['thumbnail'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" />
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                
+        <!-- Thumbnails Navigation Arrows -->
+                    <div class="acf-thumbnails-slider-nav">    
+                        <a href="#" class="acf-thumbnail-nav left">&#10094;</a> <!-- Left Arrow -->
+                        <a href="#" class="acf-thumbnail-nav right">&#10095;</a> <!-- Right Arrow -->
+                    </div>
+
                 <!-- Navigation Arrows -->
                 <div class="acf-slider-nav">
-                    <button class="acf-prev">&#x2190;</button>
-                    <button class="acf-next">&#x2192;</button>
+                    <a href="#" class="acf-prev">&#10094;</a>
+                    <a href="#" class="acf-next">&#10095;</a>
                 </div>
             </div>
         <?php else : ?>
@@ -112,8 +123,8 @@ class Elementor_ACF_Image_Slider_Widget extends \Elementor\Widget_Base {
     
                 <!-- Navigation Arrows -->
                 <div class="acf-slider-nav">
-                    <button class="acf-prev">&#x2190;</button>
-                    <button class="acf-next">&#x2192;</button>
+                    <button class="acf-prev">&#10014;</button>
+                    <button class="acf-next">&#10015;</button>
                 </div>
             </div>
         <# } else { #>

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: ACF Image Slider for Elementor
  * Description: A custom Elementor widget to display an ACF Image array field in a slider.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Maia Internet Consulting.
  * License: GPL2
  */
